@@ -1,9 +1,7 @@
 const dugme = document.getElementById("dugme");
 
 
-
 //Kreiranje i ispis matrice
-// Create one dimensional array 
 let red = new Array(10); 
 
 
@@ -39,33 +37,37 @@ provjeri_opseg = (vrijednost)=>{
         return false;
     }
 }
+function findingNeibors(myArray, i,j) {
 
-function u_nizu(niz,vrijednost){
-    return [niz].indexOf(vrijednost) != -1;
-}
-
-
-provjeri_redove_kolone = (vrijednost) =>{
+    let rowLimit = myArray.length-1;
+    let columnLimit= myArray[0].length-1;
+    let sum = myArray[i][j];
     
-    var prvi_red = red.slice(0,1);
-        var zadnji_red = red.slice(9,10);
-        var prva_kolona = red.map(function(value,index) { return value[0]; });
-        var zadnja_kolona = red.map(function(value,index) { return value[9]; });   
+    if(i<0 || j< 0) {
+        console.log("invalid Index")
+        return
+      };
     
-    if(u_nizu(prvi_red,vrijednost)){
-        return true;
-    }else{
-        return false;
+    if(i>rowLimit || j> columnLimit){
+        console.log("You are Out Of Bound");
+        return;
     }
-
-}
+    
+      for(let x = Math.max(0,i-1); x<=Math.min(i+1,rowLimit); x++){
+      for(let y = Math.max(0,j-1); y<=Math.min(j+1,columnLimit); y++){
+        if(x!==i || y!==j){
+            console.log(myArray[x][y]);
+            sum+=myArray[x][y];
+        }
+        }
+      }
+      return sum;
+    }
+    
+    
 
 saberi_sumu = (input_vrijednost) =>{
-    console.log("Pozvala se saberi sumu",input_vrijednost);
-    if(!provjeri_opseg(input_vrijednost)){
-      // console.log("nije validno");
-    }
-    
+    console.log(findingNeibors(red,4,4));
 }
 
 dugme.addEventListener("click",uzmiInput);
