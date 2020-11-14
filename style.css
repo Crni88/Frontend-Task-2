@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -6,8 +8,22 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-family: "Lato", sans-serif;
 }
 .input-polje {
   display: inline;
   margin: 0 0 2% 0;
+  color: black;
+}
+span,
+.greska {
+  color: red;
+}
+
+.poruka {
+  font-size: 20px;
+  margin: 0 0 2% 0;
+}
+.greska {
+  display: none;
 }

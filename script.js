@@ -1,4 +1,10 @@
 const dugme = document.getElementById("dugme");
+const matrica = document.getElementById("matrica");
+const uspjeh = document.getElementById("uspjeh");
+const broj = document.getElementById("broj");
+const suma = document.getElementById("suma");
+const greska = document.getElementById("greska");
+
 //Kreiranje i ispis matrice
 let red = new Array(10); 
 // Loop to create 2D array using 1D array 
@@ -34,32 +40,32 @@ provjeri_opseg = (vrijednost)=>{
 function uzmiInput() {
     let input_vrijednost = document.getElementById("unos-field").value;  
     if(provjeri_opseg(input_vrijednost)){
-        //TREBA DODAT MESSAGE
-        console.log("Nije validan unos!"); 
+        uspjeh.style.display = "none";
+        greska.style.display = "block"; 
+        greska.innerHTML=("Uneseni broj nije u opsegu matrice!");  
     }
-    else{    
+    else{  
+        //PORUKA ZA ISPIS BROJA
         input_vrijednost = input_vrijednost -1 ;
         let novi_niz = [];
         let sNumber = input_vrijednost.toString();
         for (var i = 0, len = sNumber.length; i < len; i += 1) {
             novi_niz.push(+sNumber.charAt(i));
         }
+        broj.innerHTML = input_vrijednost+1;  
+        
         saberi_sumu(novi_niz);
     }
-    //console.log(novi_niz);
-    
 }
 
 function findingNeibors(myArray, i,j) {
-    // TREBA DODATI AKO BROJ NEMA SUSJEDA
     let rowLimit = myArray.length-1;
     let columnLimit= myArray[0].length-1;
     let sum = myArray[i][j];
     let brojac=0;
       for(let x = Math.max(0,i-1); x<=Math.min(i+1,rowLimit); x++){
       for(let y = Math.max(0,j-1); y<=Math.min(j+1,columnLimit); y++){
-        if(x!==i || y!==j){ //ako je undefined ovdje dodaj da vrati false
-            //console.log(myArray[x][y]);
+        if(x!==i || y!==j){ 
             sum+=myArray[x][y];
             brojac++;
         }
@@ -69,13 +75,21 @@ function findingNeibors(myArray, i,j) {
 
           return sum;
     }else{
-            console.log("Nema osam susjeda!");
+        greska.style.display = "block"; 
+        greska.innerHTML=("Uneseni broj nema 8 susjeda!");        
         }
     }
 saberi_sumu = (input_vrijednost) =>{
-    var i = input_vrijednost[0];
-    var j = input_vrijednost[1];
-    console.log(findingNeibors(red,i,j));
+    let i = input_vrijednost[0];
+    let j = input_vrijednost[1];
+    let suma_sumarum = findingNeibors(red,i,j);
+    if(suma_sumarum === undefined){
+        uspjeh.style.display = "none";
+    }else{
+        greska.style.display = "none"; 
+        uspjeh.style.display = "block";
+        suma.innerHTML = suma_sumarum;
+    }
 }
 
 dugme.addEventListener("click",uzmiInput);
