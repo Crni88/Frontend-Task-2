@@ -9,6 +9,8 @@ body {
   justify-content: center;
   flex-direction: column;
   font-family: "Lato", sans-serif;
+  font-size: 22px;
+  background-color: whitesmoke;
 }
 .input-polje {
   display: inline;
@@ -21,7 +23,7 @@ span,
 }
 
 .poruka {
-  font-size: 20px;
+  font-size: 25px;
   margin: 0 0 2% 0;
 }
 .greska {
